@@ -13,6 +13,18 @@ return new class extends Migration
     {
         Schema::create('pencatatans', function (Blueprint $table) {
             $table->id();
+            $table->date('tanggal');
+            $table->string('nama');
+            $table->enum('jenis', ['Stok Masuk', 'Stok Keluar']);
+            $table->string('jumlah');
+            $table->decimal('harga', 15, 0)
+                ->nullable(); // hanya untuk masuk
+            $table->string('supplier')
+                ->nullable();      // hanya untuk masuk
+            $table->string('tujuan')
+                ->nullable();        // hanya untuk keluar
+            $table->text('keterangan')
+                ->nullable();
             $table->timestamps();
         });
     }
