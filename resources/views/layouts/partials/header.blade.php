@@ -1,6 +1,7 @@
 <!-- sidenav  -->
-<aside
-    {{-- class=" min-h-screen flex-wrap items-center block w-full p-0 my-4 overflow-y-auto antialiased transition-transform duration-200 -translate-x-full bg-white border-0 shadow-xl max-w-64 ease-nav-brand z-990 xl:ml-6 rounded-2xl xl:left-0 xl:translate-x-0" --}}
+<aside {{--
+    class=" min-h-screen flex-wrap items-center block w-full p-0 my-4 overflow-y-auto antialiased transition-transform duration-200 -translate-x-full bg-white border-0 shadow-xl max-w-64 ease-nav-brand z-990 xl:ml-6 rounded-2xl xl:left-0 xl:translate-x-0"
+    --}}
     class="fixed inset-y-0 flex-wrap items-center justify-between block w-full p-0 my-4 overflow-y-auto antialiased transition-transform duration-200 -translate-x-full bg-white border-0 shadow-xl max-w-64 ease-nav-brand z-990 xl:ml-6 rounded-2xl xl:left-0 xl:translate-x-0"
     aria-expanded="false">
     <div class="h-19">
@@ -9,23 +10,20 @@
         <a class="block px-8 py-6 m-0 text-sm whitespace-nowrap text-slate-700"
             href="https://demos.creative-tim.com/argon-dashboard-tailwind/pages/dashboard.html" target="_blank">
             <img src="{{ asset('/assets/img/logo-mutiara-rasa.jpeg') }}"
-                class="inline h-full max-w-full transition-all duration-200 ease-nav-brand max-h-8"
-                alt="main_logo" />
+                class="inline h-full max-w-full transition-all duration-200 ease-nav-brand max-h-8" alt="main_logo" />
             <img src="{{ asset("./assets/img/logo-mutiara-rasa.jpeg") }}"
-                class="hidden h-full max-w-full transition-all duration-200 ease-nav-brand max-h-8"
-                alt="main_logo" />
+                class="hidden h-full max-w-full transition-all duration-200 ease-nav-brand max-h-8" alt="main_logo" />
             <span class="ml-1 font-semibold transition-all duration-200 ease-nav-brand">Admin Candiber</span>
         </a>
     </div>
 
-    <hr
-        class="h-px mt-0 bg-transparent bg-gradient-to-r from-transparent via-black/40 to-transparent" />
+    <hr class="h-px mt-0 bg-transparent bg-gradient-to-r from-transparent via-black/40 to-transparent" />
 
     <div class="items-center block w-auto max-h-screen overflow-auto h-sidenav grow basis-full">
         <ul class="flex flex-col pl-0 mb-0">
             <li class="mt-0.5 w-full">
                 <a class="py-2.7 {{ $title === "Dashboard" ? 'bg-blue-500/13 rounded-lg font-semibold text-black' : '' }} text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4  transition-colors"
-                    href="./">
+                    href="./dashboard">
                     <div
                         class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
                         <i class="relative top-0 text-sm leading-normal text-blue-500 ni ni-tv-2"></i>
@@ -116,19 +114,76 @@
                 <h6 class="mb-0 font-bold text-xl text-gray-700 capitalize">{{ $title }}</h6>
             </nav>
 
+
             <div class="flex items-center mt-2 grow sm:mt-0 sm:mr-6 md:mr-0 lg:flex lg:basis-auto">
-                {{-- HAMBURGER --}}
-                <li class="flex items-center pl-4 xl:hidden ml-auto">
-                    <a href="javascript:;" class="block p-0 text-sm text-white transition-all ease-nav-brand"
-                        sidenav-trigger>
-                        <div class="w-4.5 overflow-hidden">
-                            <i class="ease mb-0.75 relative block h-0.5 rounded-sm bg-blue-500 transition-all"></i>
-                            <i class="ease mb-0.75 relative block h-0.5 rounded-sm bg-blue-500 transition-all"></i>
-                            <i class="ease relative block h-0.5 rounded-sm bg-blue-500 transition-all"></i>
-                        </div>
-                    </a>
-                </li>
-                </ul>
+                <div class="flex items-center md:ml-auto md:pr-4">
+                    <ul class="flex flex-row justify-end pl-0 mb-0 list-none md-max:w-full">
+                        @auth
+                            <li>
+                                <button id="dropdownNavbarLink" data-dropdown-toggle="dropdownNavbar"
+                                    class="flex items-center justify-between w-full py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto">Selamat datang, {{ auth()->user()->name }}
+                                    <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                        fill="none" viewBox="0 0 10 6">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="2" d="m1 1 4 4 4-4" />
+                                    </svg></button>
+                                <!-- Dropdown menu -->
+                                <div id="dropdownNavbar"
+                                    class="z-10 hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-44">
+                                    <ul class="py-2 text-sm text-gray-700"
+                                        aria-labelledby="dropdownLargeButton">
+                                        <li>
+                                            <a href="#"
+                                                class="block px-4 py-2 hover:bg-gray-100">
+                                                {{-- <i class="relative top-0 text-sm leading-normal text-blue-500 ni ni-tv-2"></i> --}}
+                                                Dashboard
+                                            </a>
+                                        </li>
+                                        {{-- <li>
+                                            <a href="#"
+                                                class="block px-4 py-2 hover:bg-gray-100">Settings</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"
+                                                class="block px-4 py-2 hover:bg-gray-100">Earnings</a>
+                                        </li> --}}
+                                    </ul>
+                                    <div class="py-1">
+                                        <form action="/logout" method="post">
+                                            @csrf
+                                            <button type="submit" class="block w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 text-left">
+                                                Logout
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </li>
+
+                        @else
+                            {{-- Login --}}
+                            <li class="flex items-center">
+                                <a href="./login"
+                                    class="block px-0 py-2 text-sm font-semibold text-black transition-all ease-nav-brand">
+                                    <i class="fa fa-user sm:mr-1"></i>
+                                    <span class="hidden sm:inline">Login</span>
+                                </a>
+                            </li>
+                        @endauth
+                        {{-- HAMBURGER --}}
+                        <li class="flex items-center pl-4 xl:hidden ml-auto">
+                            <a href="javascript:;" class="block p-0 text-sm text-white transition-all ease-nav-brand"
+                                sidenav-trigger>
+                                <div class="w-4.5 overflow-hidden">
+                                    <i
+                                        class="ease mb-0.75 relative block h-0.5 rounded-sm bg-blue-500 transition-all"></i>
+                                    <i
+                                        class="ease mb-0.75 relative block h-0.5 rounded-sm bg-blue-500 transition-all"></i>
+                                    <i class="ease relative block h-0.5 rounded-sm bg-blue-500 transition-all"></i>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </nav>
