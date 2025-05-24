@@ -34,7 +34,7 @@
 
             <li class="mt-0.5 w-full">
                 <a class="  {{ $title === "Manajemen" ? 'bg-blue-500/13 rounded-lg font-semibold text-black' : '' }} py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors"
-                    href="./bahan-baku">
+                    href="./manajemen">
                     <div
                         class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
                         <i class="relative top-0 text-sm leading-normal text-orange-500 ni ni-calendar-grid-58"></i>
@@ -133,7 +133,7 @@
                                     <ul class="py-2 text-sm text-gray-700"
                                         aria-labelledby="dropdownLargeButton">
                                         <li>
-                                            <a href="#"
+                                            <a href="/dashboard"
                                                 class="block px-4 py-2 hover:bg-gray-100">
                                                 {{-- <i class="relative top-0 text-sm leading-normal text-blue-500 ni ni-tv-2"></i> --}}
                                                 Dashboard

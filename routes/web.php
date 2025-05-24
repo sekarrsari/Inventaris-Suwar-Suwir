@@ -8,15 +8,24 @@ use App\Http\Controllers\PencatatanController;
 use App\Http\Controllers\DashboardController;
 
 
+Route::get('/', function () {
+    return redirect('/login');
+});
+
 Route::get('/login', action: [LoginController::class, 'index'])->name('login')->middleware('guest');
 Route::post('/login', action: [LoginController::class, 'authenticate']);
 Route::post('/logout', action: [LoginController::class, 'logout']);
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');
 
-Route::get('/bahan-baku', [ManajemenController::class, 'index']);
+// Manajemen Bahan Baku Routes
+Route::resource('manajemen', ManajemenController::class)->parameters([
+    'manajemen' => 'manajemen' // Parameter opsional jika nama parameter di route berbeda dengan nama model
+]);
 
-Route::get('/bahan-baku/create', [ManajemenController::class, 'create'])->name('bahan-baku.create');
+// Route::get('/bahan-baku', [ManajemenController::class, 'index']);
+
+// Route::get('/bahan-baku/create', [ManajemenController::class, 'create'])->name('bahan-baku.create');
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard', [
