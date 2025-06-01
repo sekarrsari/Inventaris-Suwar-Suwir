@@ -15,16 +15,21 @@ return new class extends Migration
             $table->id();
             $table->date('tanggal');
             $table->string('nama');
-            $table->enum('jenis', ['Stok Masuk', 'Stok Keluar']);
-            $table->string('jumlah');
-            $table->decimal('harga', 15, 0)
-                ->nullable(); // hanya untuk masuk
-            $table->string('supplier')
-                ->nullable();      // hanya untuk masuk
-            $table->string('tujuan')
-                ->nullable();        // hanya untuk keluar
-            $table->text('keterangan')
-                ->nullable();
+            // $table->enum('jenis', ['Stok Masuk', 'Stok Keluar']);
+            $table->integer('jumlah');
+            $table->enum('satuan', ['Kg', 'Btl'])
+                ->default('Kg');
+            $table->decimal('hargaSatuan', 15, 0);
+            $table->decimal('totalHarga', 15, 0);
+            $table->string('supplier');
+            $table->string('bulan');
+            $table->enum('musim', ['Hujan', 'Kemarau'])
+                ->default('Hujan');
+            
+            // $table->string('tujuan')
+            //     ->nullable();        // hanya untuk keluar
+            // $table->text('keterangan')
+            //     ->nullable();
             $table->timestamps();
         });
     }

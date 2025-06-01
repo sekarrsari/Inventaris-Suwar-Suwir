@@ -7,7 +7,7 @@
         <h1 class="text-4xl text-gray-800 font-bold text-center mb-6">Total Stok Bahan Baku</h1>
         <div class="flex flex-wrap -mx-3">
             <!-- card1 -->
-            <div class="w-full max-w-full px-3 mb-6 sm:w-1/2 sm:flex-none xl:mb-0 xl:w-1/4">
+            <div class="w-full max-w-full px-3 mb-6 sm:w-1/2 sm:flex-none xl:mb-0 xl:w-1/3">
                 <div
                     class="relative flex flex-col min-w-0 break-words bg-white shadow-xl rounded-2xl bg-clip-border">
                     <div class="flex-auto p-4">
@@ -37,7 +37,7 @@
             </div>
 
             <!-- card2 -->
-            <div class="w-full max-w-full px-3 mb-6 sm:w-1/2 sm:flex-none xl:mb-0 xl:w-1/4">
+            <div class="w-full max-w-full px-3 mb-6 sm:w-1/2 sm:flex-none xl:mb-0 xl:w-1/3">
                 <div
                     class="relative flex flex-col min-w-0 break-words bg-white shadow-xl rounded-2xl bg-clip-border">
                     <div class="flex-auto p-4">
@@ -66,7 +66,7 @@
             </div>
 
             <!-- card3 -->
-            <div class="w-full max-w-full px-3 mb-6 sm:w-1/2 sm:flex-none xl:mb-0 xl:w-1/4">
+            <div class="w-full max-w-full px-3 mb-6 sm:w-1/2 sm:flex-none xl:mb-0 xl:w-1/3">
                 <div
                     class="relative flex flex-col min-w-0 break-words bg-white shadow-xl rounded-2xl bg-clip-border">
                     <div class="flex-auto p-4">
@@ -96,7 +96,7 @@
             </div>
 
             <!-- card4 -->
-            <div class="w-full max-w-full px-3 sm:w-1/2 sm:flex-none xl:w-1/4">
+            {{-- <div class="w-full max-w-full px-3 sm:w-1/2 sm:flex-none xl:w-1/4">
                 <div
                     class="relative flex flex-col min-w-0 break-words bg-white shadow-xl rounded-2xl bg-clip-border">
                     <div class="flex-auto p-4">
@@ -114,15 +114,11 @@
                                 </div>
                             </div>
                             <div class="px-3 text-right basis-1/3">
-                                {{-- <div
-                                    class="inline-block w-12 h-12 text-center rounded-circle bg-gradient-to-tl from-orange-500 to-yellow-500">
-                                    <i class="ni leading-none ni-cart text-lg relative top-3.5 text-white"></i>
-                                </div> --}}
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
 
         <!-- cards row 2 -->

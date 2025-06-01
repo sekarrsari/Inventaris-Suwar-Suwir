@@ -16,17 +16,17 @@ class PencatatanController extends Controller
             "pencatatanStok" => $pencatatan
         ]);
     }
-    public function createStokMasuk()
+    public function create()
     {
-        return view('pencatatan.create_stok_masuk', [
+        return view('pencatatan.create', [
             "title" => "Tambah Pencatatan Stok Masuk"
         ]);
     }
 
-    public function createStokKeluar()
-    {
-        return view('pencatatan.create_stok_keluar', [
-            "title" => "Tambah Pencatatan Stok Keluar"
-        ]);
-    }
+    // public function createStokKeluar()
+    // {
+    //     return view('pencatatan.create_stok_keluar', [
+    //         "title" => "Tambah Pencatatan Stok Keluar"
+    //     ]);
+    // }
 }

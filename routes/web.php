@@ -40,6 +40,6 @@ Route::resource('manajemen', ManajemenController::class)->parameters([
 
 Route::get('/pencatatan', [PencatatanController::class, 'index']);
 
-Route::get('/pencatatan/create-stok-masuk', [PencatatanController::class, 'createStokMasuk'])->name('pencatatan.create-stok-masuk');
+Route::get('/pencatatan/create', [PencatatanController::class, 'create'])->name('pencatatan.create');
 
-Route::get('/pencatatan/create-stok-keluar', [PencatatanController::class, 'createStokKeluar'])->name('pencatatan.create-stok-keluar');
+// Route::get('/pencatatan/create-stok-keluar', [PencatatanController::class, 'createStokKeluar'])->name('pencatatan.create-stok-keluar');
