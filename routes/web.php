@@ -23,6 +23,11 @@ Route::resource('manajemen', ManajemenController::class)->parameters([
     'manajemen' => 'manajemen' // Parameter opsional jika nama parameter di route berbeda dengan nama model
 ]);
 
+// Pencatatan Stok
+Route::resource('pencatatan', PencatatanController::class)->parameters([
+    'pencatatan' => 'pencatatan'
+]);
+
 // Route::get('/bahan-baku', [ManajemenController::class, 'index']);
 
 // Route::get('/bahan-baku/create', [ManajemenController::class, 'create'])->name('bahan-baku.create');
@@ -38,8 +43,8 @@ Route::resource('manajemen', ManajemenController::class)->parameters([
 // });
 
 
-Route::get('/pencatatan', [PencatatanController::class, 'index']);
+// Route::get('/pencatatan', [PencatatanController::class, 'index']);
 
-Route::get('/pencatatan/create', [PencatatanController::class, 'create'])->name('pencatatan.create');
+// Route::get('/pencatatan/create', [PencatatanController::class, 'create'])->name('pencatatan.create');
 
 // Route::get('/pencatatan/create-stok-keluar', [PencatatanController::class, 'createStokKeluar'])->name('pencatatan.create-stok-keluar');

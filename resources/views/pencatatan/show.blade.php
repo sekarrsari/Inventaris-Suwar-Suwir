@@ -22,76 +22,49 @@
 <body
     class="m-0 font-[Poppins] flex text-base antialiased font-normal leading-default bg-gray-50 text-black">
 
-    {{-- Form Tambah Data  --}}
+    {{-- Detail Pencatatan Stok  --}}
     <div class="w-full px-6 py-6 mx-auto">
         <div class="flex flex-wrap justify-center -mx-3">
             <div class="flex-none w-full max-w-7xl px-3 py-6">
                 <div
                     class="relative flex flex-col min-w-0 mb-6 break-words bg-white border-0 border-transparent border-solid shadow-xl rounded-2xl bg-clip-border">
                     <div class="p-6 pb-0 m-6 border-b-0 border-b-solid rounded-t-2xl border-b-transparent">
-                        <h2 class="text-3xl font-bold mb-9">{{ $title }}</h2>
+                        <h2 class="text-3xl font-bold mb-9">Detail Pencatatan {{ $stokMasuk->nama }} pada {{ \Carbon\Carbon::parse($stokMasuk->tanggal)->translatedFormat('j F Y') }}</h2>
                         
                         <div class="flex-auto px-0 pt-0 pb-2">
                             <div class="p-0 overflow-x-auto"> 
-                                @if ($errors->any() && !request()->isMethod('get')) {{-- Hanya tampilkan jika bukan GET request awal --}}
-                                <div class="mb-4 p-4 bg-red-100 text-red-700 border border-red-400 rounded">
-                                    <p class="font-bold">Terdapat kesalahan pada input Anda:</p>
-                                    <ul>
-                                        @foreach ($errors->all() as $error)
-                                            <li>{{ $error }}</li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-                            @endif
-
-
                                 <form action="{{ route('pencatatan.store') }}" method="post" class="grid grid-cols-1 md:grid-cols-2 gap-7 items-center w-full mb-0 align-top border-collapse">
                                     @csrf
+                                    @method('PUT')
         
                                     <!-- Tanggal -->
                                     <div>
                                         <label for="tanggal" class="block mb-2 text-base font-medium">Tanggal Pemesanan</label>
-                                        <input type="date" name="tanggal" id="tanggal" value="{{ old('tanggalBeli') }}" required
+                                        <input type="date" name="tanggal" id="tanggal" value="{{ old('tanggal', $stokMasuk->tanggal) }}" disabled
                                             class="bg-gray-50 border border-gray-300 text-sm rounded-lg block w-full p-2.5">
-                                            @error('tanggal')
-                                            <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
-                                        @enderror
                                     </div>
         
                                     <!-- Nama Bahan Baku -->
                                     <div>
                                         <label for="nama" class="block mb-2 text-base font-medium">Nama Bahan Baku</label>
-                                        <input type="text" name="nama" id="nama" value="{{ old('nama') }}" required
-                                            class="bg-gray-50 border border-gray-300 text-sm rounded-lg block w-full p-2.5"
-                                            placeholder="Masukkan nama bahan baku">
-                                            @error('nama')
-                                            <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
-                                        @enderror
+                                        <input type="text" name="nama" id="nama" value="{{ old('nama', $stokMasuk->nama) }}" disabled
+                                            class="bg-gray-50 border border-gray-300 text-sm rounded-lg block w-full p-2.5">
                                     </div>
         
                                     <!-- Jumlah -->
                                     <div>
                                         <label for="jumlah" class="block mb-2 text-base font-medium">Jumlah Stok</label>
-                                        <input type="number" name="jumlah" id="jumlah" value="{{ old('jumlah') }}" required
-                                        class="bg-gray-50 border border-gray-300 text-sm rounded-lg block w-full p-2.5"
-                                        placeholder="Masukkan jumlah stok yang masuk">
-                                        @error('jumlah')
-                                            <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
-                                        @enderror
+                                        <input type="number" name="jumlah" id="jumlah" value="{{ old('jumlah', $stokMasuk->jumlah) }}" disabled
+                                        class="bg-gray-50 border border-gray-300 text-sm rounded-lg block w-full p-2.5">
                                     </div>
 
                                     <!-- Satuan -->
                                     <div>
                                         <label for="satuan" class="block mb-2 text-base font-medium">Satuan</label>
-                                        <select name="satuan" id="satuan" required
+                                        <p name="satuan" id="satuan" required
                                             class="bg-gray-50 border border-gray-300 text-sm rounded-lg block w-full p-2.5">
-                                            <option value="" disabled {{ old('satuan', '') === '' ? 'selected' : '' }}>Pilih salah satu opsi</option>
-                                            <option value="Kg" {{ old('satuan') == 'Kg' ? 'selected' : '' }}>Kg</option>
-                                            <option value="Btl" {{ old('satuan') == 'Btl' ? 'selected' : '' }}>Btl</option>
-                                        </select>
-                                        @error('satuan')
-                                        <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
-                                    @enderror
+                                            {{ $stokMasuk->satuan }}</p>
+                                    </p>
                                     </div>
 
                                     <!-- Harga Satuan -->
@@ -100,14 +73,9 @@
                                         <div class="relative">
                                             <span
                                                 class="absolute inset-y-0 left-0 flex items-center pl-3 text-sm text-gray-500">Rp</span>
-                                            <input type="number" name="hargaSatuan" id="hargaSatuan" value="{{ old('hargaSatuan') }}"
-                                            required
-                                                class="pl-10 bg-gray-50 border border-gray-300 text-sm rounded-lg block w-full p-2.5"
-                                                placeholder="0">
+                                            <input type="number" name="hargaSatuan" id="hargaSatuan" value="{{ old('hargaSatuan', $stokMasuk->hargaSatuan) }}" disabled
+                                                class="pl-10 bg-gray-50 border border-gray-300 text-sm rounded-lg block w-full p-2.5">
                                         </div>
-                                        @error('hargaSatuan')
-                                        <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
-                                    @enderror
                                     </div>
 
                                     <!-- Total Harga -->
@@ -116,33 +84,22 @@
                                         <div class="relative">
                                             <span
                                                 class="absolute inset-y-0 left-0 flex items-center pl-3 text-sm text-gray-500">Rp</span>
-                                            <input type="number" name="totalHarga" id="totalHarga" value="{{ old('totalHarga') }}"
-                                            required
-                                                class="pl-10 bg-gray-50 border border-gray-300 text-sm rounded-lg block w-full p-2.5"
-                                                placeholder="0" readonly>
+                                            <input type="number" name="totalHarga" id="totalHarga" value="{{ old('totalHarga', $stokMasuk->totalHarga) }}" disabled
+                                                class="pl-10 bg-gray-50 border border-gray-300 text-sm rounded-lg block w-full p-2.5">
                                         </div>
-                                        @error('totalHarga')
-                                        <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
-                                    @enderror
                                     </div>
         
                                     <!-- Supplier -->
                                     <div class="col-span-2">
                                         <label for="supplier" class="block mb-2 text-base font-medium">Supplier</label>
-                                        <input type="text" name="supplier" id="supplier" value="{{ old('supplier') }}"required
-                                            class="bg-gray-50 border border-gray-300 text-sm rounded-lg block w-full p-2.5"
-                                            placeholder="Masukkan nama supplier">
-                                            @error('supplier')
-                                            <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
-                                        @enderror
+                                        <input type="text" name="supplier" id="supplier" value="{{ old('supplier', $stokMasuk->supplier) }}" disabled
+                                            class="bg-gray-50 border border-gray-300 text-sm rounded-lg block w-full p-2.5">
                                     </div>
                                     </div>
-
+                                
                                     <!-- Tombol -->
                                     <div class="my-6 flex gap-4">
-                                        <button type="submit"
-                                            class="bg-blue-700 hover:bg-blue-800 text-white focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 focus:outline-none">Simpan</button>
-                                            <a href="{{ route('pencatatan.index') }}"class="py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100">Batal</a>
+                                            <a href="{{ route('pencatatan.index') }}"class="py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100">Kembali</a>
                                         </div>
                                 </form>
                             </div>

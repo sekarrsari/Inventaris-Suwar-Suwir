@@ -16,7 +16,7 @@ return new class extends Migration
             $table->date('tanggal');
             $table->string('nama');
             // $table->enum('jenis', ['Stok Masuk', 'Stok Keluar']);
-            $table->integer('jumlah');
+            $table->number('jumlah');
             $table->enum('satuan', ['Kg', 'Btl'])
                 ->default('Kg');
             $table->decimal('hargaSatuan', 15, 0);
@@ -25,11 +25,6 @@ return new class extends Migration
             $table->string('bulan');
             $table->enum('musim', ['Hujan', 'Kemarau'])
                 ->default('Hujan');
-            
-            // $table->string('tujuan')
-            //     ->nullable();        // hanya untuk keluar
-            // $table->text('keterangan')
-            //     ->nullable();
             $table->timestamps();
         });
     }

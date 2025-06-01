@@ -21,7 +21,7 @@
 
 <body class="m-0 font-[Poppins] flex text-base antialiased font-normal leading-default bg-gray-50 text-black">
 
-    {{-- Form Edit Data Bahan Baku --}}
+    {{-- Detail Data Bahan Baku --}}
     <div class="w-full px-6 py-6 mx-auto">
         <div class="flex flex-wrap justify-center -mx-3">
             <div class="flex-none w-full max-w-7xl px-3 py-6">
