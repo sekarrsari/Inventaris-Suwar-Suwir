@@ -115,15 +115,11 @@
                                                     Edit
                                                 </a>
                                                 {{-- Tombol Delete --}}
-                                                <form action="{{ route('manajemen.destroy', $bahan->id) }}" method="POST" class="inline">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit"
-                                                            class="focus:outline-none text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-xs px-3 py-2 me-1 mb-1"
-                                                            onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
-                                                        Hapus
-                                                    </button>
-                                                </form>
+                                                <button type="button"
+                                                    onclick="showDeleteModal('{{ route('manajemen.destroy', $bahan->id) }}')"
+                                                    class="focus:outline-none text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-xs px-3 py-2 me-1 mb-1">
+                                                    Hapus
+                                                </button>
                                             </td>
                                         </tr>
                                     @empty
@@ -378,4 +374,110 @@
                     class="flex items-center justify-center px-3 h-8 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700">Previous</a>
             </li> --}}
 
+
+    {{-- HTML untuk Modal Konfirmasi Hapus --}}
+    <div id="deleteConfirmationModal" tabindex="-1" aria-hidden="true"
+        class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-modal md:h-full">
+        <div class="relative p-4 w-full max-w-md h-full md:h-auto">
+            {{-- Latar belakang semi-transparan saat modal aktif --}}
+            <div id="modalBackdrop"
+                class="fixed inset-0 bg-gray-900 bg-opacity-50 transition-opacity duration-300 ease-in-out"
+                style="display: none;"></div>
+
+            {{-- Konten Modal --}}
+            <div class="relative bg-white rounded-lg shadow transform transition-all duration-300 ease-in-out scale-95 opacity-0"
+                id="modalContent" style="display: none;">
+                <button type="button"
+                    class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center"
+                    onclick="hideDeleteModal()">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd"
+                            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                            clip-rule="evenodd"></path>
+                    </svg>
+                </button>
+                <div class="p-6 text-center">
+                    <svg class="mx-auto mb-4 w-14 h-14 text-red-600" fill="none" stroke="currentColor"
+                        viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    <h3 class="mb-5 text-lg font-semibold text-black">
+                        Apakah Anda yakin ingin menghapus data ini?
+                    </h3>
+                    <form id="deleteModalForm" method="POST" action=""> {{-- Action akan diisi oleh JavaScript --}}
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit"
+                            class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
+                            Ya, Hapus
+                        </button>
+                        <button type="button" onclick="hideDeleteModal()"
+                            class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10">
+                            Batal
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    {{-- JavaScript untuk Modal --}}
+    @push('scripts')
+        <script>
+            const deleteModalElement = document.getElementById('deleteConfirmationModal');
+            const deleteModalForm = document.getElementById('deleteModalForm');
+            const modalBackdrop = document.getElementById('modalBackdrop');
+            const modalContent = document.getElementById('modalContent'); // Tambahkan ini
+
+            function showDeleteModal(actionUrl) {
+                deleteModalForm.action = actionUrl;
+                deleteModalElement.classList.remove('hidden');
+                deleteModalElement.classList.add('flex'); // Untuk memposisikan modal di tengah
+
+                // Tampilkan backdrop dan konten modal dengan sedikit animasi
+                modalBackdrop.style.display = 'block';
+                modalContent.style.display = 'block';
+                setTimeout(() => { // Beri sedikit waktu untuk display block sebelum transisi
+                    modalBackdrop.classList.remove('opacity-0');
+                    modalBackdrop.classList.add('opacity-100');
+                    modalContent.classList.remove('opacity-0', 'scale-95');
+                    modalContent.classList.add('opacity-100', 'scale-100');
+                }, 10);
+
+
+            }
+
+            function hideDeleteModal() {
+                // Sembunyikan dengan animasi
+                modalBackdrop.classList.remove('opacity-100');
+                modalBackdrop.classList.add('opacity-0');
+                modalContent.classList.remove('opacity-100', 'scale-100');
+                modalContent.classList.add('opacity-0', 'scale-95');
+
+                setTimeout(() => { // Tunggu animasi selesai sebelum menyembunyikan total
+                    deleteModalElement.classList.add('hidden');
+                    deleteModalElement.classList.remove('flex');
+                    modalBackdrop.style.display = 'none';
+                    modalContent.style.display = 'none';
+                    deleteModalForm.action = '';
+                }, 300); // Sesuaikan dengan durasi transisi Tailwind (default 300ms)
+            }
+
+            if (modalBackdrop) {
+                modalBackdrop.addEventListener('click', function (event) {
+                    if (event.target === modalBackdrop) {
+                        hideDeleteModal();
+                    }
+                });
+            }
+
+            document.addEventListener('keydown', function (event) {
+                if (event.key === "Escape" && !deleteModalElement.classList.contains('hidden')) {
+                    hideDeleteModal();
+                }
+            });
+        </script>
+    @endpush
 @endsection
