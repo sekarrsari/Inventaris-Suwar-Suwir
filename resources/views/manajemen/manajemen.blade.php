@@ -103,7 +103,24 @@
                                                 {{ $bahan->stokMinimum }}</td> --}}
                                             <td
                                                 class="px-6 py-3 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                                {{ $bahan->status }}</td>
+                                                @php
+                                                    $statusText = $bahan->status; // Mengambil status langsung dari data
+                                                    $statusClass = '';
+                                                    // Menggunakan nilai $statusText yang sudah ada atau ditentukan di atas
+                                                    if (strtolower($statusText) === 'tersedia') {
+                                                        $statusClass = 'border-green-500 text-green-700 bg-green-100';
+                                                    } elseif (strtolower($statusText) === 'hampir habis') {
+                                                        $statusClass = 'border-yellow-500 text-yellow-700 bg-yellow-100';
+                                                    } elseif (strtolower($statusText) === 'habis') {
+                                                        $statusClass = 'border-red-500 text-red-700 bg-red-100';
+                                                    } else {
+                                                        $statusClass = 'border-gray-400 text-gray-700 bg-gray-100'; // Default class
+                                                    }
+                                                @endphp
+                                                <span class="px-3 py-1 text-xs font-semibold border rounded-md {{ $statusClass }}">
+                                                    {{ ucfirst($statusText) }}
+                                                </span>
+                                            </td>
                                             <td
                                                 class="px-6 py-3 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                                                 {{-- Tombol Detail (Show) --}}

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->date('tanggal');
             $table->string('nama');
             // $table->enum('jenis', ['Stok Masuk', 'Stok Keluar']);
-            $table->number('jumlah');
+            $table->integer('jumlah');
             $table->enum('satuan', ['Kg', 'Btl'])
                 ->default('Kg');
             $table->decimal('hargaSatuan', 15, 0);

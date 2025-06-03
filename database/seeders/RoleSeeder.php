@@ -14,14 +14,14 @@ class RoleSeeder extends Seeder
     public function run(): void
     {
         // Create roles
-        $roles = ['admin', 'pegawai'];
+        $roles = ['mitra', 'pegawai'];
 
         foreach ($roles as $role) {
             \Spatie\Permission\Models\Role::firstOrCreate(['name' => $role]);
         }
         
-        $admin = User::find(1);
-        $admin->assignRole('admin');
+        $mitra = User::find(1);
+        $mitra->assignRole('mitra');
 
         $pegawai1 = User::find(2);
         $pegawai1->assignRole('pegawai');

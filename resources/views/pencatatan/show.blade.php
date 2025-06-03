@@ -114,7 +114,7 @@
 </body>
 
 @include('layouts.partials.script')
-{{-- Tambahkan script di bawah ini --}}
+
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const jumlahInput = document.getElementById('jumlah');

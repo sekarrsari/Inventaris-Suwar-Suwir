@@ -6,6 +6,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ManajemenController;
 use App\Http\Controllers\PencatatanController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\SupplierController;
 
 
 Route::get('/', function () {
@@ -27,6 +28,12 @@ Route::resource('manajemen', ManajemenController::class)->parameters([
 Route::resource('pencatatan', PencatatanController::class)->parameters([
     'pencatatan' => 'pencatatan'
 ]);
+
+// Supplier
+Route::resource('supplier', SupplierController::class)->parameters([
+    'supplier' => 'supplier'
+]);
+
 
 // Route::get('/bahan-baku', [ManajemenController::class, 'index']);
 

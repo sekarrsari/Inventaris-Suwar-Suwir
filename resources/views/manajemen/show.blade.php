@@ -32,7 +32,7 @@
 
                         <div class="flex-auto px-0 pt-0 pb-2">
                             <div class="p-0 overflow-x-auto">
-                                <form action="{{ route('manajemen.update', $bahanBaku->id) }}" method="post" class="grid grid-cols-1 md:grid-cols-2 gap-7 items-center w-full mb-0 align-top border-collapse">
+                                <form action="{{ route('manajemen.store', $bahanBaku->id) }}" method="post" class="grid grid-cols-1 md:grid-cols-2 gap-7 items-center w-full mb-0 align-top border-collapse">
                                 @csrf
                                 @method('PUT')
 

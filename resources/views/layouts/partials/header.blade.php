@@ -8,13 +8,19 @@
         <i class="absolute top-0 right-0 p-4 opacity-50 cursor-pointer fas fa-times text-slate-400 xl:hidden"
             sidenav-close></i>
         <a class="block px-8 py-6 m-0 text-sm whitespace-nowrap text-slate-700"
-            href="https://demos.creative-tim.com/argon-dashboard-tailwind/pages/dashboard.html" target="_blank">
+            href="#" target="_blank">
             <img src="{{ asset('/assets/img/logo-mutiara-rasa.jpeg') }}"
                 class="inline h-full max-w-full transition-all duration-200 ease-nav-brand max-h-8" alt="main_logo" />
             <img src="{{ asset("./assets/img/logo-mutiara-rasa.jpeg") }}"
                 class="hidden h-full max-w-full transition-all duration-200 ease-nav-brand max-h-8" alt="main_logo" />
-            <span class="ml-1 font-semibold transition-all duration-200 ease-nav-brand">Admin Candiber</span>
-        </a>
+            @if (Auth::check())
+                <span class="ml-1 font-semibold transition-all duration-200 ease-nav-brand">{{ Auth::user()->name }}</span>
+            @else
+                {{-- Opsional: Tampilkan sesuatu jika tidak ada user login, atau biarkan kosong --}}
+                <span class="ml-1 font-semibold transition-all duration-200 ease-nav-brand">Guest</span>
+                {{-- Atau bisa juga: <span class="ml-1 font-semibold transition-all duration-200 ease-nav-brand">Admin
+                    Candiber</span> --}}
+            @endif </a>
     </div>
 
     <hr class="h-px mt-0 bg-transparent bg-gradient-to-r from-transparent via-black/40 to-transparent" />
@@ -33,22 +39,22 @@
             </li>
 
             <li class="mt-0.5 w-full">
-                <a class="  {{ $title === "Manajemen" ? 'bg-blue-500/13 rounded-lg font-semibold text-black' : '' }} py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors"
+                <a class="{{ $title === "Manajemen" ? 'bg-blue-500/13 rounded-lg font-semibold text-black' : '' }} py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors"
                     href="./manajemen">
                     <div
                         class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
-                        <i class="relative top-0 text-sm leading-normal text-orange-500 ni ni-calendar-grid-58"></i>
+                        <i class="relative top-0 text-sm leading-normal text-orange-500 ni ni-archive-2"></i>
                     </div>
                     <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">Manajemen Bahan Baku</span>
                 </a>
             </li>
 
             <li class="mt-0.5 w-full">
-                <a class="  {{ $title === "Pencatatan" ? 'bg-blue-500/13 rounded-lg font-semibold text-black' : '' }} py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors"
+                <a class="{{ $title === "Pencatatan" ? 'bg-blue-500/13 rounded-lg font-semibold text-black' : '' }} py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors"
                     href="./pencatatan">
                     <div
                         class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center fill-current stroke-0 text-center xl:p-2.5">
-                        <i class="relative top-0 text-sm leading-normal text-emerald-500 ni ni-credit-card"></i>
+                        <i class="relative top-0 text-sm leading-normal text-emerald-500 ni ni-single-copy-04"></i>
                     </div>
                     <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">Pencatatan Stok</span>
                 </a>
@@ -59,7 +65,7 @@
                     href="./pages/virtual-reality.html">
                     <div
                         class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
-                        <i class="relative top-0 text-sm leading-normal text-cyan-500 ni ni-app"></i>
+                        <i class="relative top-0 text-sm leading-normal text-cyan-500 ni ni-cart"></i>
                     </div>
                     <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">Pencatatan Penjualan</span>
                 </a>
@@ -70,9 +76,20 @@
                     href="./pages/rtl.html">
                     <div
                         class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
-                        <i class="relative top-0 text-sm leading-normal text-red-600 ni ni-world-2"></i>
+                        <i class="relative top-0 text-sm leading-normal text-red-600 ni ni-chart-bar-32"></i>
                     </div>
                     <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">Peramalan Pengadaan</span>
+                </a>
+            </li>
+
+            <li class="mt-0.5 w-full">
+                <a class="{{ $title === "Supplier" ? 'bg-blue-500/13 rounded-lg font-semibold text-black' : '' }} py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors"
+                    href="./supplier">
+                    <div
+                        class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
+                        <i class="relative top-0 text-sm leading-normal text-blue-500 ni ni-briefcase-24"></i>
+                    </div>
+                    <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">Manajemen Supplier</span>
                 </a>
             </li>
 
@@ -121,7 +138,8 @@
                         @auth
                             <li>
                                 <button id="dropdownNavbarLink" data-dropdown-toggle="dropdownNavbar"
-                                    class="flex items-center justify-between w-full py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto">Selamat datang, {{ auth()->user()->name }}
+                                    class="flex items-center justify-between w-full py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto">Selamat
+                                    datang, {{ auth()->user()->name }}
                                     <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                         fill="none" viewBox="0 0 10 6">
                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -130,28 +148,27 @@
                                 <!-- Dropdown menu -->
                                 <div id="dropdownNavbar"
                                     class="z-10 hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-44">
-                                    <ul class="py-2 text-sm text-gray-700"
-                                        aria-labelledby="dropdownLargeButton">
+                                    <ul class="py-2 text-sm text-gray-700" aria-labelledby="dropdownLargeButton">
                                         <li>
-                                            <a href="/dashboard"
-                                                class="block px-4 py-2 hover:bg-gray-100">
-                                                {{-- <i class="relative top-0 text-sm leading-normal text-blue-500 ni ni-tv-2"></i> --}}
+                                            <a href="/dashboard" class="block px-4 py-2 hover:bg-gray-100">
+                                                {{-- <i
+                                                    class="relative top-0 text-sm leading-normal text-blue-500 ni ni-tv-2"></i>
+                                                --}}
                                                 Dashboard
                                             </a>
                                         </li>
                                         {{-- <li>
-                                            <a href="#"
-                                                class="block px-4 py-2 hover:bg-gray-100">Settings</a>
+                                            <a href="#" class="block px-4 py-2 hover:bg-gray-100">Settings</a>
                                         </li>
                                         <li>
-                                            <a href="#"
-                                                class="block px-4 py-2 hover:bg-gray-100">Earnings</a>
+                                            <a href="#" class="block px-4 py-2 hover:bg-gray-100">Earnings</a>
                                         </li> --}}
                                     </ul>
                                     <div class="py-1">
                                         <form action="/logout" method="post">
                                             @csrf
-                                            <button type="submit" class="block w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 text-left">
+                                            <button type="submit"
+                                                class="block w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 text-left">
                                                 Logout
                                             </button>
                                         </form>

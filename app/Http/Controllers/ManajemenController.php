@@ -12,7 +12,7 @@ class ManajemenController extends Controller
         $bahan = Manajemen::orderBy('kode', 'asc')->get(); // Urutkan berdasarkan kode
 
         return view('manajemen.manajemen', [
-            "title" => "Manajemen",
+            "title" => "Manajemen Bahan Baku",
             "bahanBaku" => $bahan
         ]);
     }
@@ -28,13 +28,13 @@ class ManajemenController extends Controller
     {
         $validatedData = $request->validate([
             'nama' => 'required|min:3|max:255',
-            'jenis' => 'required|in:Bahan utama,Tambahan', // Jenis harus salah satu dari opsi
-            'satuan' => 'required|in:Kg,Liter', // Satuan harus salah satu dari opsi
+            'jenis' => 'required|in:Bahan utama,Tambahan', 
+            'satuan' => 'required|in:Kg,Btl',
             'supplier' => 'required|max:255',
             'tanggalBeli' => 'required|date',
             'harga' => 'required|numeric',
             'stokMinimum' => 'required|numeric',
-            'status' => 'required|in:Tersedia,Hampir habis,Habis', // Status harus salah satu dari opsi
+            'status' => 'required|in:Tersedia,Hampir habis,Habis',
         ]);
 
                 // Logika untuk membuat kode bahan baku otomatis
@@ -86,7 +86,7 @@ class ManajemenController extends Controller
         $rules = [
             'nama' => 'required|max:255',
             'jenis' => 'required|in:Bahan utama,Tambahan',
-            'satuan' => 'required|in:Kg,Liter',
+            'satuan' => 'required|in:Kg,Btl',
             'supplier' => 'required|max:255',
             'tanggalBeli' => 'required|date',
             'harga' => 'required|numeric',

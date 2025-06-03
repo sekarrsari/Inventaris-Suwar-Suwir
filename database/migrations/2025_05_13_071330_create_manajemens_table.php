@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('nama');
             $table->enum('jenis', ['Bahan utama', 'Tambahan'])
                 ->default('Bahan utama');
-            $table->enum('satuan', ['Kg', 'Liter'])
+            $table->enum('satuan', ['Kg', 'Btl'])
                 ->default("Kg");
             $table->string('supplier');
             $table->date('tanggalBeli');

@@ -84,7 +84,6 @@
                                         <label for="satuan" class="block mb-2 text-base font-medium">Satuan</label>
                                         <select name="satuan" id="satuan" required
                                             class="bg-gray-50 border border-gray-300 text-sm rounded-lg block w-full p-2.5">
-                                            <option value="" disabled {{ old('satuan', '') === '' ? 'selected' : '' }}>Pilih salah satu opsi</option>
                                             <option value="Kg" {{ old('satuan', $stokMasuk->satuan) == 'Kg' ? 'selected' : '' }}>Kg</option>
                                             <option value="Btl" {{ old('satuan', $stokMasuk->satuan) == 'Btl' ? 'selected' : '' }}>Btl</option>
                                         </select>
@@ -113,7 +112,7 @@
                                         <div class="relative">
                                             <span
                                                 class="absolute inset-y-0 left-0 flex items-center pl-3 text-sm text-gray-500">Rp</span>
-                                            <input type="number" name="totalHarga" id="totalHarga" value="{{ old('totalHarga', $stokMasuk->totalHarga) }}" required
+                                            <input type="number" name="totalHarga" id="totalHarga" value="{{ old('totalHarga', $stokMasuk->totalHarga) }}" readonly
                                                 class="pl-10 bg-gray-50 border border-gray-300 text-sm rounded-lg block w-full p-2.5">
                                         </div>
                                         @error('totalHarga')
@@ -149,7 +148,7 @@
 </body>
 
 @include('layouts.partials.script')
-{{-- Tambahkan script di bawah ini --}}
+
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const jumlahInput = document.getElementById('jumlah');

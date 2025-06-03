@@ -90,7 +90,7 @@
                                             class="bg-gray-50 border border-gray-300 text-sm rounded-lg block w-full p-2.5">
                                             <option value="" disabled {{ old('satuan', '') === '' ? 'selected' : '' }}>Pilih salah satu opsi</option>
                                             <option value="Kg" {{ old('satuan') == 'Kg' ? 'selected' : '' }}>Kg</option>
-                                            <option value="Liter" {{ old('satuan') == 'Liter' ? 'selected' : '' }}>Liter
+                                            <option value="Btl" {{ old('satuan') == 'Btl' ? 'selected' : '' }}>Btl
                                             </option>
                                         </select>
                                         @error('satuan')
@@ -141,7 +141,7 @@
 
                                     <!-- Stok Minimum -->
                                     <div>
-                                        <label for="stokMinimum" class="block mb-2 text-base font-medium">Stok Minimum
+                                        <label for="stokMinimum" id="labelStokMinimum" class="block mb-2 text-base font-medium">Stok Minimum
                                             (Kg)</label>
                                         <input type="number" name="stokMinimum" id="stokMinimum" value="{{ old('stokMinimum') }}" required
                                             class="bg-gray-50 border border-gray-300 text-sm rounded-lg block w-full p-2.5"
@@ -186,6 +186,35 @@
 </body>
 
 @include('layouts.partials.script')
+
+{{-- Handle stok minimum supaya otomatis ambil satuan yang diinputkan --}}
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const satuanSelect = document.getElementById('satuan');
+        const labelStokMinimum = document.getElementById('labelStokMinimum');
+        const baseLabelText = 'Stok Minimum'; // Teks dasar label
+
+        // Fungsi untuk memperbarui label stok minimum
+        function updateLabelStokMinimum() {
+            const selectedSatuan = satuanSelect.value;
+            if (selectedSatuan) {
+                labelStokMinimum.textContent = `${baseLabelText} (${selectedSatuan})`;
+            } else {
+                // Jika tidak ada satuan yang dipilih, kembali ke teks dasar atau sembunyikan satuan
+                labelStokMinimum.textContent = baseLabelText;
+                // Atau jika ingin placeholder seperti (Pilih Satuan Dulu)
+                // labelStokMinimum.textContent = `${baseLabelText} (Pilih Satuan Dulu)`;
+            }
+        }
+
+        // Panggil fungsi saat halaman pertama kali dimuat (untuk menghandle old value)
+        updateLabelStokMinimum();
+
+        // Tambahkan event listener untuk perubahan pada select satuan
+        satuanSelect.addEventListener('change', updateLabelStokMinimum);
+    });
+</script>
+
 
 </html>
 
