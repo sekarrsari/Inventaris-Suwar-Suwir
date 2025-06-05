@@ -39,6 +39,17 @@
             </li>
 
             <li class="mt-0.5 w-full">
+                <a class="{{ $title === "Supplier" ? 'bg-blue-500/13 rounded-lg font-semibold text-black' : '' }} py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors"
+                    href="./supplier">
+                    <div
+                        class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
+                        <i class="relative top-0 text-sm leading-normal text-blue-500 ni ni-briefcase-24"></i>
+                    </div>
+                    <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">Manajemen Supplier</span>
+                </a>
+            </li>
+
+            <li class="mt-0.5 w-full">
                 <a class="{{ $title === "Manajemen" ? 'bg-blue-500/13 rounded-lg font-semibold text-black' : '' }} py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors"
                     href="./manajemen">
                     <div
@@ -61,7 +72,7 @@
             </li>
 
             <li class="mt-0.5 w-full">
-                <a class="py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors"
+                <a class="{{ $title === "Penjualan" ? 'bg-blue-500/13 rounded-lg font-semibold text-black' : '' }} py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors"
                     href="./pages/virtual-reality.html">
                     <div
                         class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
@@ -79,17 +90,6 @@
                         <i class="relative top-0 text-sm leading-normal text-red-600 ni ni-chart-bar-32"></i>
                     </div>
                     <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">Peramalan Pengadaan</span>
-                </a>
-            </li>
-
-            <li class="mt-0.5 w-full">
-                <a class="{{ $title === "Supplier" ? 'bg-blue-500/13 rounded-lg font-semibold text-black' : '' }} py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors"
-                    href="./supplier">
-                    <div
-                        class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
-                        <i class="relative top-0 text-sm leading-normal text-blue-500 ni ni-briefcase-24"></i>
-                    </div>
-                    <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">Manajemen Supplier</span>
                 </a>
             </li>
 
