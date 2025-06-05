@@ -95,10 +95,21 @@
                                     <!-- Supplier -->
                                     <div>
                                         <label for="supplier" class="block mb-2 text-base font-medium">Supplier</label>
-                                        <input type="text" name="supplier" id="supplier" value="{{ old('supplier', $bahanBaku->supplier) }}"
-                                            required
-                                            class="bg-gray-50 border border-gray-300 text-sm rounded-lg block w-full p-2.5">
-                                            @error('supplier')
+                                        <select name="supplier_id" id="supplier_id" required
+                                                class="bg-gray-50 border border-gray-300 text-sm rounded-lg block w-full p-2.5">
+                                            <option value="" disabled>Pilih supplier</option>
+                                            @if(isset($suppliers) && $suppliers->count() > 0)
+                                                @foreach ($suppliers as $supplier)
+                                                    <option value="{{ $supplier->id }}" 
+                                                            {{ old('supplier_id', $bahanBaku->supplier_id) == $supplier->id ? 'selected' : '' }}>
+                                                        {{ $supplier->namaSupplier }}
+                                                    </option>
+                                                @endforeach
+                                            @else
+                                                <option value="" disabled>Data supplier tidak tersedia</option>
+                                            @endif
+                                        <select>  {{-- <<< ERROR DI SINI --}}
+                                        @error('supplier') {{-- <<< ERROR DI SINI --}}
                                             <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
                                         @enderror
                                     </div>

@@ -91,7 +91,19 @@
                                                 {{ $bahan->satuan }}</td> --}}
                                             <td
                                                 class="px-6 py-3 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                                {{ $bahan->supplier }}</td>
+                                                @if ($bahan->relationLoaded('supplier') && $bahan->getRelation('supplier') instanceof \App\Models\Supplier)
+                                                    {{-- Jika relasi 'supplier' dimuat dan merupakan instance dari Model Supplier --}}
+                                                    {{ $bahan->getRelation('supplier')->namaSupplier }}
+                                                @elseif (is_object($bahan->supplier) && property_exists($bahan->supplier, 'namaSupplier'))
+                                                    {{-- Fallback jika $bahan->supplier adalah objek dengan properti namaSupplier (meski tidak melalui getRelation) --}}
+                                                    {{ $bahan->supplier->namaSupplier }}
+                                                @elseif (is_string($bahan->supplier))
+                                                    {{-- Jika $bahan->supplier adalah string, tampilkan sebagai data lama/bermasalah --}}
+                                                    <span class="italic text-orange-500" title="Data supplier ini mungkin perlu diperbaiki. ID Relasi: {{ $bahan->supplier_id ?? 'tidak ada' }}">String: {{ $bahan->supplier }}</span>
+                                                @else
+                                                    <span class="italic text-gray-500">N/A</span>
+                                                @endif
+                                            </td>
                                             <td
                                                 class="px-6 py-3 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                                                 {{ $bahan->tanggalBeli }}</td>

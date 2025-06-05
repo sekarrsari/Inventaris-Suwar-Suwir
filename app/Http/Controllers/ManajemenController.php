@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Manajemen;
+use App\Models\Supplier;
 
 class ManajemenController extends Controller
 {
     public function index() 
     {
-        $bahan = Manajemen::orderBy('kode', 'asc')->get(); // Urutkan berdasarkan kode
+        // Eager load relasi supplier untuk efisiensi jika Anda menampilkan nama supplier di tabel
+        $bahan = Manajemen::with('supplier')->orderBy('kode', 'asc')->get();
 
         return view('manajemen.manajemen', [
             "title" => "Manajemen Bahan Baku",
@@ -19,8 +21,12 @@ class ManajemenController extends Controller
 
     public function create()
     {
+        // Ambil data suppliers untuk di-pass ke view create
+        $suppliers = Supplier::orderBy('namaSupplier', 'asc')->get(['id', 'namaSupplier']); // Sesuaikan 'namaSupplier' jika beda
+
         return view('manajemen.create', [
-            "title" => "Tambah Bahan Baku"
+            "title" => "Tambah Bahan Baku",
+            "suppliers" => $suppliers // Kirim data suppliers ke view
         ]);
     }
 
@@ -30,33 +36,24 @@ class ManajemenController extends Controller
             'nama' => 'required|min:3|max:255',
             'jenis' => 'required|in:Bahan utama,Tambahan', 
             'satuan' => 'required|in:Kg,Btl',
-            'supplier' => 'required|max:255',
+            'supplier_id' => 'required|exists:suppliers,id', // Pastikan supplier_id ada di tabel suppliers
             'tanggalBeli' => 'required|date',
             'harga' => 'required|numeric',
             'stokMinimum' => 'required|numeric',
             'status' => 'required|in:Tersedia,Hampir habis,Habis',
         ]);
 
-                // Logika untuk membuat kode bahan baku otomatis
-                $lastBahan = Manajemen::orderBy('kode', 'desc')->first();
-                $nextNumber = 1;
-                if ($lastBahan) {
-                    // Ekstrak nomor dari kode terakhir (misal dari BB02 menjadi 2)
-                    $lastNumber = (int) substr($lastBahan->kode, 2);
-                    $nextNumber = $lastNumber + 1;
-                }
-                // Format kode baru dengan padding nol (misal menjadi BB03)
-                $validatedData['kode'] = 'BB' . str_pad($nextNumber, 2, '0', STR_PAD_LEFT);
-        
-                // Pastikan kode unik, meskipun seharusnya sudah unik karena logika di atas
-                // Ini sebagai lapisan keamanan tambahan jika ada kondisi balapan (race condition)
-                // Namun, untuk aplikasi skala kecil, ini mungkin tidak terlalu kritikal
-                // Jika ingin sangat aman, bisa ditambahkan loop dengan pengecekan unik
-                // while (Manajemen::where('kode', $validatedData['kode'])->exists()) {
-                //     $nextNumber++;
-                //     $validatedData['kode'] = 'BB' . str_pad($nextNumber, 2, '0', STR_PAD_LEFT);
-                // }
-        
+            // Logika untuk membuat kode bahan baku otomatis
+            $lastBahan = Manajemen::orderBy('kode', 'desc')->first();
+            $nextNumber = 1;
+            if ($lastBahan) {
+                // Ekstrak nomor dari kode terakhir (misal dari BB02 menjadi 2)
+                $lastNumber = (int) substr($lastBahan->kode, 2);
+                $nextNumber = $lastNumber + 1;
+            }
+            // Format kode baru dengan padding nol (misal menjadi BB03)
+            $validatedData['kode'] = 'BB' . str_pad($nextNumber, 2, '0', STR_PAD_LEFT);
+
         // Membuat record baru di database menggunakan model Manajemen
         Manajemen::create($validatedData);
 
@@ -66,6 +63,9 @@ class ManajemenController extends Controller
 
     public function show(Manajemen $manajemen)
     {
+        // Load relasi supplier jika belum ter-load (berguna jika tidak di-pass dari route binding dengan with)
+        $manajemen->load('supplier');
+
         return view('manajemen.show', [
             "title" => "Detail Bahan Baku",
             "bahanBaku" => $manajemen
@@ -74,10 +74,14 @@ class ManajemenController extends Controller
 
     public function edit(Manajemen $manajemen)
     {
+        $suppliers = Supplier::orderBy('namaSupplier', 'asc')->get(['id', 'namaSupplier']);
+        $manajemen->load('supplier'); // Pastikan relasi supplier juga dimuat untuk $bahanBaku
+    
         return view('manajemen.edit', [
             "title" => "Edit Bahan Baku",
-            "bahanBaku" => $manajemen
-        ]);
+            "bahanBaku" => $manajemen,
+            "suppliers" => $suppliers
+        ]);    
     }   
 
     public function update(Request $request, Manajemen $manajemen)
@@ -87,8 +91,7 @@ class ManajemenController extends Controller
             'nama' => 'required|max:255',
             'jenis' => 'required|in:Bahan utama,Tambahan',
             'satuan' => 'required|in:Kg,Btl',
-            'supplier' => 'required|max:255',
-            'tanggalBeli' => 'required|date',
+            'supplier_id' => 'required|exists:suppliers,id',            'tanggalBeli' => 'required|date',
             'harga' => 'required|numeric',
             'stokMinimum' => 'required|numeric',
             'status' => 'required|in:Tersedia,Hampir habis,Habis',

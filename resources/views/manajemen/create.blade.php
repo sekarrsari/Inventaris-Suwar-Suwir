@@ -100,16 +100,25 @@
 
                                     <!-- Supplier -->
                                     <div>
-                                        <label for="supplier" class="block mb-2 text-base font-medium">Supplier</label>
-                                        <input type="text" name="supplier" id="supplier" value="{{ old('supplier') }}"
-                                            required
-                                            class="bg-gray-50 border border-gray-300 text-sm rounded-lg block w-full p-2.5"
-                                            placeholder="Masukkan nama supplier">
-                                            @error('supplier')
+                                        <label for="supplier_id" class="block mb-2 text-base font-medium">Supplier</label>
+                                        <select name="supplier_id" id="supplier_id" required
+                                                class="bg-gray-50 border border-gray-300 text-sm rounded-lg block w-full p-2.5">
+                                            <option value="" disabled {{ old('supplier_id', '') === '' ? 'selected' : '' }}>Pilih supplier</option>
+                                            @if(isset($suppliers) && $suppliers->count() > 0)
+                                                @foreach ($suppliers as $supplier_option) {{-- Ganti variabel loop agar tidak bentrok --}}
+                                                    <option value="{{ $supplier_option->id }}" {{ old('supplier_id') == $supplier_option->id ? 'selected' : '' }}>
+                                                        {{ $supplier_option->namaSupplier }}
+                                                    </option>
+                                                @endforeach
+                                            @else
+                                                <option value="" disabled>Data supplier tidak tersedia</option>
+                                            @endif
+                                        </select>
+                                        @error('supplier_id')
                                             <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
                                         @enderror
                                     </div>
-
+                                    
                                     <!-- Tanggal Pembelian Terakhir -->
                                     <div>
                                         <label for="tanggalBeli" class="block mb-2 text-base font-medium">Tanggal Pembelian

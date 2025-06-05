@@ -37,10 +37,10 @@ class DatabaseSeeder extends Seeder
 
 
         $this->call([
+            SupplierSeeder::class,
             ManajemenSeeder::class,
             PencatatanSeeder::class,
-            RoleSeeder::class,
-            SupplierSeeder::class
+            RoleSeeder::class
         ]);
 
     }
