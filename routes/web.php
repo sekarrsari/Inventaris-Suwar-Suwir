@@ -18,7 +18,7 @@ Route::get('/login', action: [LoginController::class, 'index'])->name('login')->
 Route::post('/login', action: [LoginController::class, 'authenticate']);
 Route::post('/logout', action: [LoginController::class, 'logout']);
 
-Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth')->name('dashboard');
 
 // Manajemen Bahan Baku Routes
 Route::resource('manajemen', ManajemenController::class)->parameters([
