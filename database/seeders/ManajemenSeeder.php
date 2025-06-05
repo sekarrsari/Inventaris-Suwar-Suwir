@@ -49,6 +49,7 @@ class ManajemenSeeder extends Seeder
             "tanggalBeli" => "2025-05-06",
             "harga" => 5000,
             "stokMinimum" => 100,
+            "stok_aktual" => 1000,
             "status" => "Tersedia"
         ]);
 
@@ -61,6 +62,7 @@ class ManajemenSeeder extends Seeder
             "tanggalBeli" => "2025-05-06",
             "harga" => 12000,
             "stokMinimum" => 50,
+            "stok_aktual" => 150,
             "status" => "Tersedia"
         ]);
 
@@ -73,6 +75,7 @@ class ManajemenSeeder extends Seeder
             "tanggalBeli" => "2025-05-06",
             "harga" => 25000,
             "stokMinimum" => 10,
+            "stok_aktual" => 200,
             "status" => "Hampir habis"
         ]);
 

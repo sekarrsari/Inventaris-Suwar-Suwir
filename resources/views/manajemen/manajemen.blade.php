@@ -61,9 +61,9 @@
                                         <th scope="col"
                                             class="px-6 py-3 font-bold text-left align-middle bg-transparent border-b border-collapse shadow-none border-b-solid tracking-none whitespace-nowrap">
                                             Harga per satuan</th>
-                                        {{-- <th scope="col"
+                                        <th scope="col"
                                             class="px-6 py-3 font-bold text-left align-middle bg-transparent border-b border-collapse shadow-none border-b-solid tracking-none whitespace-nowrap">
-                                            Stok Minimum</th> --}}
+                                            Stok Saat Ini</th>
                                         <th scope="col"
                                             class="px-6 py-3 font-bold text-left align-middle bg-transparent border-b border-collapse shadow-none border-b-solid tracking-none whitespace-nowrap">
                                             Status</th>
@@ -106,13 +106,14 @@
                                             </td>
                                             <td
                                                 class="px-6 py-3 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                                {{ $bahan->tanggalBeli }}</td>
+                                                {{ $bahan->tanggalBeli->format('d-m-Y') }}</td>
                                             <td
                                                 class="px-6 py-3 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                                {{ $bahan->harga }}</td>
-                                            {{-- <td
+                                                    Rp {{ number_format($bahan->harga, 0, ',', '.') }}
+                                                </td>
+                                            <td
                                                 class="px-6 py-3 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                                {{ $bahan->stokMinimum }}</td> --}}
+                                                {{ $bahan->stok_aktual }}</td>
                                             <td
                                                 class="px-6 py-3 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                                                 @php

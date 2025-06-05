@@ -160,6 +160,18 @@
                                         @enderror
                                     </div>
 
+                                    <!-- Stok Aktual / Saat ini -->
+                                    <div>
+                                        <label for="stok_aktual" id="labelstok_aktual" class="block mb-2 text-base font-medium">Stok Saat Ini
+                                            (Kg)</label>
+                                        <input type="number" name="stok_aktual" id="stok_aktual" value="{{ old('stok_aktual') }}" required
+                                            class="bg-gray-50 border border-gray-300 text-sm rounded-lg block w-full p-2.5"
+                                            placeholder="0">
+                                            @error('stok_aktual')
+                                            <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
+                                        @enderror
+                                    </div>
+
                                     <!-- Status -->
                                     <div>
                                         <label for="status" class="block mb-2 text-base font-medium">Status</label>

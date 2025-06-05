@@ -7,7 +7,7 @@ use App\Http\Controllers\ManajemenController;
 use App\Http\Controllers\PencatatanController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SupplierController;
-// use App\Http\Controllers\PenjualanController;
+use App\Http\Controllers\PenjualanController;
 
 
 Route::get('/', function () {
@@ -35,10 +35,10 @@ Route::resource('supplier', SupplierController::class)->parameters([
     'supplier' => 'supplier'
 ]);
 
-// // Penjualan
-// Route::resource('penjualan', PenjualanController::class)->parameters([
-//     'penjualan' => 'penjualan'
-// ]);
+// Penjualan
+Route::resource('penjualan', PenjualanController::class)->parameters([
+    'penjualan' => 'penjualan'
+]);
 
 
 // Route::get('/bahan-baku', [ManajemenController::class, 'index']);

@@ -10,4 +10,8 @@ class Pencatatan extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+    protected $casts = [
+        'tanggal' => 'date'
+    ];
 }

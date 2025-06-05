@@ -6,120 +6,66 @@
         <!-- row 1 -->
         <h1 class="text-4xl text-gray-800 font-bold text-center mb-6">Total Stok Bahan Baku</h1>
         <div class="flex flex-wrap -mx-3">
-            <!-- card1 -->
+        @if(isset($bahanBakuItems) && $bahanBakuItems->count() > 0)
+        @foreach($bahanBakuItems as $item)
             <div class="w-full max-w-full px-3 mb-6 sm:w-1/2 sm:flex-none xl:mb-0 xl:w-1/3">
-                <div
-                    class="relative flex flex-col min-w-0 break-words bg-white shadow-xl rounded-2xl bg-clip-border">
+                <div class="relative flex flex-col min-w-0 break-words bg-white shadow-xl rounded-2xl bg-clip-border">
                     <div class="flex-auto p-4">
-                        <div class="flex flex-row -mx-3">
+                        <div class="flex flex-row -mx-3 items-center">
+                            {{-- Nama, Stok, Tanggal --}}
                             <div class="flex-none w-2/3 max-w-full px-3">
                                 <div>
-                                    <p
-                                        class="mb-3 text-lg font-semibold leading-normal uppercase">
-                                        Singkong</p>
-                                    <h5 class="mb-2 font-bold">500 Kg</h5>
-                                    <p class="mb-0">
-                                        <span class="text-sm font-bold leading-normal text-emerald-500">+55%</span>
-                                        since yesterday
+                                    <p class="mb-2 text-lg font-semibold leading-normal uppercase">
+                                        {{ $item->nama }}  {{-- NAMA BAHAN BAKU --}}
+                                    </p>
+                                    <h5 class="mb-1 font-bold">
+                                        Stok saat ini : {{ $item->stok_aktual }} {{ $item->satuan ?? 'Unit' }} {{-- STOK AKTUAL & SATUAN --}}
+                                    </h5>
+                                    <p class="mb-0 text-sm"> {{-- Menggunakan kelas yang konsisten --}}
+                                        Pembelian Akhir:
+                                        <span class="font-semibold">
+                                            @if($item->tanggalBeli)
+                                            {{ \Carbon\Carbon::parse($item->tanggalBeli)->format('d M Y') }} {{-- TANGGAL BELI TERAKHIR --}}
+                                            @else
+                                            N/A
+                                            @endif
+                                        </span>
                                     </p>
                                 </div>
                             </div>
+
+                            {{-- Status --}}
                             <div class="px-3 text-right basis-1/3">
-                                {{-- <div
-                                    class="inline-block w-12 h-12 text-center rounded-circle bg-gradient-to-tl from-blue-500 to-violet-500">
-                                    <i
-                                        class="ni leading-none ni-money-coins text-lg relative top-3.5 text-white"></i>
-                                </div> --}}
+                                @php
+                                    $statusText = $item->status ?? 'Tidak diketahui'; // Ambil status dari item, beri default
+                                    $statusClass = '';
+                                    if (strtolower($statusText) === 'tersedia') {
+                                        $statusClass = 'border-green-500 text-green-700 bg-green-100';
+                                    } elseif (strtolower($statusText) === 'hampir habis') {
+                                        $statusClass = 'border-yellow-500 text-yellow-700 bg-yellow-100';
+                                    } elseif (strtolower($statusText) === 'habis') {
+                                        $statusClass = 'border-red-500 text-red-700 bg-red-100';
+                                    } else {
+                                        $statusClass = 'border-gray-400 text-gray-700 bg-gray-100'; // Default class
+                                    }
+                                @endphp
+                                    <span class="inline-block px-3 py-1 text-xs font-semibold border rounded-md {{ $statusClass }}">
+                                        {{ ucfirst($statusText) }}
+                                    </span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <!-- card2 -->
-            <div class="w-full max-w-full px-3 mb-6 sm:w-1/2 sm:flex-none xl:mb-0 xl:w-1/3">
-                <div
-                    class="relative flex flex-col min-w-0 break-words bg-white shadow-xl rounded-2xl bg-clip-border">
-                    <div class="flex-auto p-4">
-                        <div class="flex flex-row -mx-3">
-                            <div class="flex-none w-2/3 max-w-full px-3">
-                                <div>
-                                    <p
-                                        class="mb-3 text-lg font-semibold leading-normal uppercase">
-                                        Gula Merah</p>
-                                    <h5 class="mb-2 font-bold">10 Kg</h5>
-                                    <p class="mb-0">
-                                        <span class="text-sm font-bold leading-normal text-emerald-500">+3%</span>
-                                        since last week
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="px-3 text-right basis-1/3">
-                                {{-- <div
-                                    class="inline-block w-12 h-12 text-center rounded-circle bg-gradient-to-tl from-red-600 to-orange-600">
-                                    <i class="ni leading-none ni-world text-lg relative top-3.5 text-white"></i>
-                                </div> --}}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- card3 -->
-            <div class="w-full max-w-full px-3 mb-6 sm:w-1/2 sm:flex-none xl:mb-0 xl:w-1/3">
-                <div
-                    class="relative flex flex-col min-w-0 break-words bg-white shadow-xl rounded-2xl bg-clip-border">
-                    <div class="flex-auto p-4">
-                        <div class="flex flex-row -mx-3">
-                            <div class="flex-none w-2/3 max-w-full px-3">
-                                <div>
-                                    <p
-                                        class="mb-3 text-lg font-semibold leading-normal uppercase">
-                                        Perasa Makanan</p>
-                                    <h5 class="mb-2 font-bold">3 Liter</h5>
-                                    <p class="mb-0">
-                                        <span class="text-sm font-bold leading-normal text-red-600">-2%</span>
-                                        since last quarter
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="px-3 text-right basis-1/3">
-                                {{-- <div
-                                    class="inline-block w-12 h-12 text-center rounded-circle bg-gradient-to-tl from-emerald-500 to-teal-400">
-                                    <i
-                                        class="ni leading-none ni-paper-diploma text-lg relative top-3.5 text-white"></i>
-                                </div> --}}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- card4 -->
-            {{-- <div class="w-full max-w-full px-3 sm:w-1/2 sm:flex-none xl:w-1/4">
-                <div
-                    class="relative flex flex-col min-w-0 break-words bg-white shadow-xl rounded-2xl bg-clip-border">
-                    <div class="flex-auto p-4">
-                        <div class="flex flex-row -mx-3">
-                            <div class="flex-none w-2/3 max-w-full px-3">
-                                <div>
-                                    <p
-                                        class="mb-3 text-lg font-semibold leading-normal uppercase">
-                                        Mentega</p>
-                                    <h5 class="mb-2 font-bold">5 Kg</h5>
-                                    <p class="mb-0">
-                                        <span class="text-sm font-bold leading-normal text-emerald-500">+5%</span>
-                                        than last month
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="px-3 text-right basis-1/3">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> --}}
+        @endforeach
         </div>
+    </div>
+    @else
+        <div class="w-full px-3">
+            <p class="text-center text-gray-500">Tidak ada data bahan baku untuk ditampilkan.</p>
+        </div>
+    @endif
+
 
         <!-- cards row 2 -->
         <div class="flex flex-wrap mt-6 -mx-3">

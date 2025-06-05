@@ -70,8 +70,8 @@
 
                                     <!-- Supplier -->
                                     <div>
-                                        <label for="supplier" class="block mb-2 text-base font-medium">Supplier</label>
-                                        <input type="text" name="supplier" id="supplier" value="{{ old('supplier', $bahanBaku->supplier) }}"
+                                        <label for="supplier_id" class="block mb-2 text-base font-medium">Supplier</label>
+                                        <input type="text" name="supplier_id" id="supplier_id" value="{{ old('supplier_id', $bahanBaku->supplier_id) }}"
                                         disabled
                                             class="bg-gray-50 border border-gray-300 text-sm rounded-lg block w-full p-2.5">
                                     </div>
@@ -103,6 +103,14 @@
                                         <label for="stokMinimum" class="block mb-2 text-base font-medium">Stok Minimum
                                             (Kg)</label>
                                         <input type="number" name="stokMinimum" id="stokMinimum" value="{{ old('stokMinimum', $bahanBaku->stokMinimum) }}" disabled
+                                            class="bg-gray-50 border border-gray-300 text-sm rounded-lg block w-full p-2.5">
+                                    </div>
+
+                                    <!-- Stok Aktual / Saat ini -->
+                                    <div>
+                                        <label for="stok_aktual" class="block mb-2 text-base font-medium">Stok Saat Ini
+                                            (Kg)</label>
+                                        <input type="number" name="stok_aktual" id="stok_aktual" value="{{ old('stok_aktual', $bahanBaku->stok_aktual) }}" disabled
                                             class="bg-gray-50 border border-gray-300 text-sm rounded-lg block w-full p-2.5">
                                     </div>
 

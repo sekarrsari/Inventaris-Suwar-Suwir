@@ -24,6 +24,7 @@ return new class extends Migration
             $table->date('tanggalBeli');
             $table->decimal('harga', 12, 0);
             $table->integer('stokMinimum');
+            $table->integer('stok_aktual');
             $table->enum('status', ['Tersedia', 'Hampir habis', 'Habis'])
                 ->default('Tersedia');
             $table->timestamps();

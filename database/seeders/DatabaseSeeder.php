@@ -40,7 +40,8 @@ class DatabaseSeeder extends Seeder
             SupplierSeeder::class,
             ManajemenSeeder::class,
             PencatatanSeeder::class,
-            RoleSeeder::class
+            RoleSeeder::class,
+            PenjualanSeeder::class
         ]);
 
     }

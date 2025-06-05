@@ -123,7 +123,7 @@
                                         <tr class="text-sm border-b hover:bg-gray-50">
                                             <td
                                                 class="px-6 py-3 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                                {{ $stok->tanggal }}
+                                                {{ $stok->tanggal ? $stok->tanggal->format('d-m-Y') : '' }}
                                             </td>
                                             <td
                                                 class="px-6 py-3 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
@@ -144,7 +144,7 @@
                                                 {{ $stok->hargaSatuan }}</td> --}}
                                             <td
                                                 class="px-6 py-3 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                                {{ $stok->totalHarga }}
+                                                Rp {{ number_format($stok->totalHarga, 0, ',', '.') }}
                                             </td>
                                             <td
                                                 class="px-6 py-3 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
