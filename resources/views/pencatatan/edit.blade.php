@@ -52,7 +52,7 @@
                                     <!-- Tanggal -->
                                     <div>
                                         <label for="tanggal" class="block mb-2 text-base font-medium">Tanggal Pemesanan</label>
-                                        <input type="date" name="tanggal" id="tanggal" value="{{ old('tanggal', $stokMasuk->tanggal) }}" required
+                                        <input type="date" name="tanggal" id="tanggal" value="{{ old('tanggal', $stokMasuk->tanggal ? $stokMasuk->tanggal->format('Y-m-d') : '') }}" required
                                             class="bg-gray-50 border border-gray-300 text-sm rounded-lg block w-full p-2.5">
                                             @error('tanggal')
                                             <p class="mt-1 text-xs text-red-600">{{ $message }}</p>

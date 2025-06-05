@@ -80,7 +80,7 @@
                                     <div>
                                         <label for="tanggalBeli" class="block mb-2 text-base font-medium">Tanggal Pembelian
                                             Terakhir</label>
-                                        <input type="date" name="tanggalBeli" id="tanggalBeli" value="{{ old('tanggalBeli', $bahanBaku->tanggalBeli) }}"
+                                        <input type="date" name="tanggalBeli" id="tanggalBeli" value="{{ old('tanggalBeli', $bahanBaku->tanggalBeli ? $bahanBaku->tanggalBeli->format('Y-m-d') : '') }}"
                                         disabled
                                             class="bg-gray-50 border border-gray-300 text-sm rounded-lg block w-full p-2.5">
                                     </div>

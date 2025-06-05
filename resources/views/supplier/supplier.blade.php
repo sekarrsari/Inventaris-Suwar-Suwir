@@ -85,7 +85,7 @@
                                                 {{ $supply->bahan }}</td>
                                             <td
                                             class="px-6 py-3 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                            {{ $supply->tanggal }}</td>
+                                            {{ $supply->tanggal->format('d-m-Y') }} </td>
                                             <td
                                             class="px-6 py-3 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                                             {{ $supply->telepon }}</td>

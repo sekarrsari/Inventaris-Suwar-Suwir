@@ -38,19 +38,23 @@
                 </a>
             </li>
 
+            <li class="w-full mt-4">
+                <h6 class="pl-6 ml-2 text-xs text-blue-700 font-bold leading-tight uppercase opacity-70">Manajemen</h6>
+            </li>
+
             <li class="mt-0.5 w-full">
-                <a class="{{ $title === "Supplier" ? 'bg-blue-500/13 rounded-lg font-semibold text-black' : '' }} py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors"
+                <a class="{{ $title === "Manajemen Supplier" ? 'bg-blue-500/13 rounded-lg font-semibold text-black' : '' }} py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors"
                     href="./supplier">
                     <div
                         class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
-                        <i class="relative top-0 text-sm leading-normal text-blue-500 ni ni-briefcase-24"></i>
+                        <i class="relative top-0 text-sm leading-normal text-red-600 ni ni-briefcase-24"></i>
                     </div>
                     <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">Manajemen Supplier</span>
                 </a>
             </li>
 
             <li class="mt-0.5 w-full">
-                <a class="{{ $title === "Manajemen" ? 'bg-blue-500/13 rounded-lg font-semibold text-black' : '' }} py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors"
+                <a class="{{ $title === "Manajemen Bahan Baku" ? 'bg-blue-500/13 rounded-lg font-semibold text-black' : '' }} py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors"
                     href="./manajemen">
                     <div
                         class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
@@ -60,8 +64,12 @@
                 </a>
             </li>
 
+            <li class="w-full mt-4">
+                <h6 class="pl-6 ml-2 text-xs text-blue-700 font-bold leading-tight uppercase opacity-70">Pencatatan</h6>
+            </li>
+
             <li class="mt-0.5 w-full">
-                <a class="{{ $title === "Pencatatan" ? 'bg-blue-500/13 rounded-lg font-semibold text-black' : '' }} py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors"
+                <a class="{{ $title === "Pencatatan Stok Masuk" ? 'bg-blue-500/13 rounded-lg font-semibold text-black' : '' }} py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors"
                     href="./pencatatan">
                     <div
                         class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center fill-current stroke-0 text-center xl:p-2.5">
@@ -72,7 +80,7 @@
             </li>
 
             <li class="mt-0.5 w-full">
-                <a class="{{ $title === "Penjualan" ? 'bg-blue-500/13 rounded-lg font-semibold text-black' : '' }} py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors"
+                <a class="{{ $title === "Data Penjualan" ? 'bg-blue-500/13 rounded-lg font-semibold text-black' : '' }} py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors"
                     href="./penjualan">
                     <div
                         class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
@@ -80,6 +88,10 @@
                     </div>
                     <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">Pencatatan Penjualan</span>
                 </a>
+            </li>
+
+            <li class="w-full mt-4">
+                <h6 class="pl-6 ml-2 text-xs text-blue-700 font-bold leading-tight uppercase opacity-70">Peramalan</h6>
             </li>
 
             <li class="mt-0.5 w-full">
@@ -94,7 +106,7 @@
             </li>
 
             <li class="w-full mt-4">
-                <h6 class="pl-6 ml-2 text-xs font-bold leading-tight uppercase opacity-60">Account
+                <h6 class="pl-6 ml-2 text-xs text-blue-700 font-bold leading-tight uppercase opacity-70">Account
                     pages</h6>
             </li>
 

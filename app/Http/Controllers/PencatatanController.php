@@ -35,7 +35,7 @@ class PencatatanController extends Controller
         $stok = $query->paginate(10); // $stok sekarang berisi hasil (objek pagination)
 
         return view('pencatatan.pencatatan', [
-            "title" => "Pencatatan",
+            "title" => "Pencatatan Stok Masuk",
             "stokMasuk" => $stok
         ]);
     }

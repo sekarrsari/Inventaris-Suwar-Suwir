@@ -72,7 +72,7 @@
                                     <!-- Tanggal Mulai Kerjasama -->
                                     <div>
                                         <label for="tanggal" class="block mb-2 text-base font-medium">Tanggal Mulai Kerjasama</label>
-                                        <input type="date" name="tanggal" id="tanggal" value="{{ old('tanggal', $dataSupplier->tanggal) }}"
+                                        <input type="date" name="tanggal" id="tanggal" value="{{ old('tanggal', $dataSupplier->tanggal ? $dataSupplier->tanggal->format('Y-m-d') : '') }}"
                                             required
                                             class="bg-gray-50 border border-gray-300 text-sm rounded-lg block w-full p-2.5">
                                             @error('tanggal')

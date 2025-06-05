@@ -84,6 +84,9 @@
                                     <tr>
                                         <th scope="col"
                                             class="px-6 py-3 font-bold text-left align-middle bg-transparent border-b border-collapse shadow-none border-b-solid tracking-none whitespace-nowrap">
+                                            No.</th>
+                                        <th scope="col"
+                                            class="px-6 py-3 font-bold text-left align-middle bg-transparent border-b border-collapse shadow-none border-b-solid tracking-none whitespace-nowrap">
                                             Tanggal Pemesanan</th>
                                         <th scope="col"
                                             class="px-6 py-3 font-bold text-left align-middle bg-transparent border-b border-collapse shadow-none border-b-solid tracking-none whitespace-nowrap">
@@ -121,6 +124,15 @@
                                 <tbody class="bg-white">
                                     @forelse ($stokMasuk as $stok)
                                         <tr class="text-sm border-b hover:bg-gray-50">
+                                            <td
+                                                class="px-6 py-3 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+                                                {{-- Jika tidak menggunakan pagination --}}
+                                                {{-- {{ $loop->iteration }} --}}
+
+                                                {{-- Jika menggunakan pagination, $suppliers harus berupa instance Paginator
+                                                --}}
+                                                {{ ($stokMasuk->currentPage() - 1) * $stokMasuk->perPage() + $loop->iteration }}
+                                            </td>
                                             <td
                                                 class="px-6 py-3 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                                                 {{ $stok->tanggal ? $stok->tanggal->format('d-m-Y') : '' }}
