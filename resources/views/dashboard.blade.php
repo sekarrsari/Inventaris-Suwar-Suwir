@@ -115,7 +115,7 @@
                     </div>
                 </div>
             </div>
-        
+        </div>
         
 
         <!-- cards row 3 -->

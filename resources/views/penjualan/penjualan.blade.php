@@ -8,10 +8,12 @@
                     <div class="p-6 pb-0 mb-0 border-b-0 border-b-solid rounded-t-2xl border-b-transparent">
                         <div class="flex justify-between items-center mt-3 mb-12">
                             <h3 class="text-4xl text-gray-800 font-bold">Penjualan Bulanan</h3>
+                            @can('create_penjualan')
                             <a href="{{ route('penjualan.create') }}"
                                 class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 focus:outline-none">
                                 Tambah Data Penjualan
                             </a>
+                            @endcan
                         </div>
 
                         {{-- Form Filter --}}
@@ -154,18 +156,24 @@
                                                     class="focus:outline-none text-white bg-blue-500 hover:bg-blue-600 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-xs px-3 py-2 me-1 mb-1">
                                                     Detail
                                                 </a> --}}
-                                                {{-- Tombol Edit --}}
-                                                <a href="{{ route('penjualan.edit', $jual->id) }}"
-                                                    class="focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-xs px-3 py-2 me-1 mb-1">
-                                                    Edit
-                                                </a>
-                                                {{-- Tombol Delete --}}
-                                                <button type="button"
-                                                    onclick="showDeleteModal('{{ route('penjualan.destroy', $jual->id) }}')"
-                                                    class="focus:outline-none text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-xs px-3 py-2 me-1 mb-1">
-                                                    Hapus
-                                                </button>
+                                                @canany(['edit_penjualan', 'delete_penjualan'])
+                                                    @can('edit_penjualan')
+                                                    {{-- Tombol Edit --}}
+                                                    <a href="{{ route('penjualan.edit', $jual->id) }}"
+                                                        class="focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-xs px-3 py-2 me-1 mb-1">
+                                                        Edit
+                                                    </a>
+                                                    @endcan
+                                                    @can('delete_penjualan')
+                                                    {{-- Tombol Delete --}}
+                                                    <button type="button"
+                                                        onclick="showDeleteModal('{{ route('penjualan.destroy', $jual->id) }}')"
+                                                        class="focus:outline-none text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-xs px-3 py-2 me-1 mb-1">
+                                                        Hapus
+                                                    </button>
+                                                    @endcan
                                             </td>
+                                            @endcanany
                                         </tr>
                                     @empty
                                         <tr>

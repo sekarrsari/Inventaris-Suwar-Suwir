@@ -40,6 +40,7 @@ class ManajemenController extends Controller
             'tanggalBeli' => 'required|date',
             'harga' => 'required|numeric',
             'stokMinimum' => 'required|numeric',
+            'stok_aktual' => 'required|numeric',
             'status' => 'required|in:Tersedia,Hampir habis,Habis',
         ]);
 
@@ -94,6 +95,7 @@ class ManajemenController extends Controller
             'supplier_id' => 'required|exists:suppliers,id',            'tanggalBeli' => 'required|date',
             'harga' => 'required|numeric',
             'stokMinimum' => 'required|numeric',
+            'stok_aktual' => 'required|numeric',
             'status' => 'required|in:Tersedia,Hampir habis,Habis',
         ];
 

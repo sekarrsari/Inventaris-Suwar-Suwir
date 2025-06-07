@@ -9,14 +9,13 @@
                         <div class="flex justify-between items-center mt-3 mb-12">
                             <h3 class="text-4xl text-gray-800 font-bold">Pencatatan Stok Masuk</h3>
                             <div class="flex items-center">
+                                @can('create_pencatatan')
+                                {{-- Tombol Tambah Stok Masuk --}}
                                 <button type="button" onclick="window.location.href='./pencatatan/create'"
                                     class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 focus:outline-none">
                                     Tambah Stok Masuk
                                 </button>
-                                {{-- <button type="button" onclick="window.location.href='./pencatatan/create-stok-keluar'"
-                                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 focus:outline-none">
-                                    Tambah Stok Keluar
-                                </button> --}}
+                                @endcan
                             </div>
                         </div>
 
@@ -168,29 +167,31 @@
                                             <td
                                                 class="px-6 py-3 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                                                 {{ $stok->musim }}</td> --}}
-                                            <td
+                                                <td
                                                 class="px-6 py-3 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                                {{-- <button type="button"
-                                                    class="focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2">Edit</button>
-                                                --}}
-
                                                 {{-- Tombol Detail (Show) --}}
                                                 <a href="{{ route('pencatatan.show', $stok->id) }}"
                                                     class="focus:outline-none text-white bg-blue-500 hover:bg-blue-600 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-xs px-3 py-2 me-1 mb-1">
                                                     Detail
                                                 </a>
+                                                @canany(['edit_pencatatan', 'delete_pencatatan'])
                                                 {{-- Tombol Edit --}}
+                                                @can('edit_pencatatan')
                                                 <a href="{{ route('pencatatan.edit', $stok->id) }}"
                                                     class="focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-xs px-3 py-2 me-1 mb-1">
                                                     Edit
                                                 </a>
+                                                @endcan
                                                 {{-- Tombol Delete --}}
+                                                @can('delete_pencatatan')
                                                 <button type="button"
                                                     onclick="showDeleteModal('{{ route('pencatatan.destroy', $stok->id) }}')"
                                                     class="focus:outline-none text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-xs px-3 py-2 me-1 mb-1">
                                                     Hapus
                                                 </button>
+                                                @endcan
                                             </td>
+                                            @endcanany
                                         </tr>
                                     @empty
                                         <tr>

@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use App\Models\Penjualan;
+use App\Policies\PenjualanPolicy;
 
 class AppServiceProvider extends ServiceProvider
 {
