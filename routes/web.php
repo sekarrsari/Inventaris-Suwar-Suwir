@@ -8,6 +8,7 @@ use App\Http\Controllers\PencatatanController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\PenjualanController;
+use App\Http\Controllers\PeramalanController;
 
 
 Route::get('/', function () {
@@ -94,4 +95,11 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('penjualan', PenjualanController::class)->parameters([
         'penjualan' => 'penjualan'
     ]);
+
+    // Peramalan
+    // Route untuk MENAMPILKAN halaman form peramalan
+    Route::get('/peramalan', [PeramalanController::class, 'index'])->name('peramalan.index');
+    
+    // Route untuk MEMPROSES data dari form peramalan
+    Route::post('/peramalan', [PeramalanController::class, 'submit'])->name('peramalan.submit');
 });
