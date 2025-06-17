@@ -34,34 +34,29 @@ class RoleSeeder extends Seeder
         // Reset cached roles and permissions
 
         
-        // Buat permissions untuk Supplier
-        Permission::firstOrCreate(['name' => 'view_supplier']);
-        Permission::firstOrCreate(['name' => 'create_supplier']);
-        Permission::firstOrCreate(['name' => 'edit_supplier']);
-        Permission::firstOrCreate(['name' => 'delete_supplier']);
+        // 
 
-        // Buat permissions untuk Manajemen
-        Permission::firstOrCreate(['name' => 'view_manajemen']);
-        Permission::firstOrCreate(['name' => 'create_manajemen']);
-        Permission::firstOrCreate(['name' => 'edit_manajemen']);
-        Permission::firstOrCreate(['name' => 'delete_manajemen']);
+        // --- Buat Semua Permissions ---
+        $permissions = [
+            'view_pegawai', 'create_pegawai', 'edit_pegawai', 'delete_pegawai',
+            'view_supplier', 'create_supplier', 'edit_supplier', 'delete_supplier',
+            'view_manajemen', 'create_manajemen', 'edit_manajemen', 'delete_manajemen',
+            'view_pencatatan', 'create_pencatatan', 'edit_pencatatan', 'delete_pencatatan',
+            'view_penjualan', 'create_penjualan', 'edit_penjualan', 'delete_penjualan',
+        ];
 
-        // Buat permissions untuk Pencatatan
-        Permission::firstOrCreate(['name' => 'view_pencatatan']);
-        Permission::firstOrCreate(['name' => 'create_pencatatan']);
-        Permission::firstOrCreate(['name' => 'edit_pencatatan']);
-        Permission::firstOrCreate(['name' => 'delete_pencatatan']);
-
-        // Buat permissions untuk Penjualan
-        Permission::firstOrCreate(['name' => 'view_penjualan']);
-        Permission::firstOrCreate(['name' => 'create_penjualan']);
-        Permission::firstOrCreate(['name' => 'edit_penjualan']);
-        Permission::firstOrCreate(['name' => 'delete_penjualan']);
-
+        foreach ($permissions as $permission) {
+            Permission::firstOrCreate(['name' => $permission]);
+        }
 
         // Buat role mitra dan berikan izin HANYA MELIHAT
         $roleMitra = Role::firstOrCreate(['name' => 'mitra']);
         $roleMitra->givePermissionTo([
+            // CRUD Pegawai
+            'view_pegawai', 
+            'create_pegawai',
+            'edit_pegawai',
+            'delete_pegawai',
             // CRUD Supplier
             'view_supplier', 
             'create_supplier',
@@ -82,6 +77,8 @@ class RoleSeeder extends Seeder
         $rolePegawai = Role::firstOrCreate(['name' => 'pegawai']);
         // $rolePegawai->givePermissionTo(Permission::all());
         $rolePegawai->givePermissionTo([
+            // View Pagawai
+            'view_pegawai',
             // View Supplier
             'view_supplier',
             // RUD Manajemen Bahan Baku
